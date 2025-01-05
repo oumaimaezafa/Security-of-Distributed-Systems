@@ -1,22 +1,67 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
   <div class="container-fluid">
+    <!-- Brand Logo -->
     <a class="navbar-brand" href="#">EcomApp</a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+
+    <!-- Toggler for mobile view -->
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
       <span class="navbar-toggler-icon"></span>
     </button>
+
+    <!-- Navbar Links -->
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <!-- Left navigation links -->
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="#">Home</a>
+          <a class="nav-link active" aria-current="page" routerLink="/">Home</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" routerLink="/products">Products</a>
+          <a class="nav-link" routerLink="/products"  *ngIf="keycloakService.getUserRoles().includes('ADMIN')">Products</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" routerLink="/customers">Customers</a>
         </li>
       </ul>
 
+      <!-- User profile or login -->
+      <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+        <li *ngIf="profile; else login_template" class="nav-item dropdown">
+          <a
+            class="nav-link dropdown-toggle"
+            href="#"
+            id="navbarDropdown"
+            role="button"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+          >
+            <i class="fas fa-user-circle"></i> {{ profile.username }}
+          </a>
+          <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+            <li>
+              <a class="dropdown-item" (click)="handleLogout()">
+                <i class="fas fa-sign-out-alt"></i> Logout
+              </a>
+            </li>
+          </ul>
+        </li>
+
+        <!-- Login button if not authenticated -->
+        <ng-template #login_template>
+          <li class="nav-item">
+            <button class="btn btn-success" (click)="handleLogin()">
+              <i class="fas fa-sign-in-alt"></i> Login
+            </button>
+          </li>
+        </ng-template>
+      </ul>
     </div>
   </div>
 </nav>

@@ -12,6 +12,7 @@ import { KeycloakAngularModule, KeycloakService } from "keycloak-angular";
 export function initializeKeycloak(keycloak: KeycloakService, platformId: Object) {
   return () => {
     if (isPlatformBrowser(platformId)) { // Vérifiez si le code est exécuté dans un navigateur
+      const origin = window.location.origin; // Utilisez window uniquement côté navigateur
       return keycloak.init({
         config: {
           url: 'http://localhost:8080',
@@ -20,8 +21,7 @@ export function initializeKeycloak(keycloak: KeycloakService, platformId: Object
         },
         initOptions: {
           onLoad: 'check-sso',
-          silentCheckSsoRedirectUri:
-            window.location.origin + '/assets/silent-check-sso.html'
+          silentCheckSsoRedirectUri: `${origin}/assets/silent-check-sso.html`
         }
       });
     } else {
