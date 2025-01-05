@@ -28,6 +28,7 @@ public class SecurityConfig {
                         .requestMatchers("/api/**","/h2-console/**").permitAll() // Autoriser les requêtes vers /api/** sans authentification
                         .anyRequest().authenticated() // Toutes les autres requêtes nécessitent une authentification
                 )
+                .oauth2ResourceServer(o2->o2.jwt(Customizer.withDefaults()))
                 .build();
     }
 
