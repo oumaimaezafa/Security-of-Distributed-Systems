@@ -19,7 +19,7 @@ public class ProductRestController {
 
 
     @GetMapping("/products")
-    @PreAuthorize("hasAuthority('ADMIN')")
+    //@PreAuthorize("hasAuthority('ADMIN')")
     public List<Product> productList()  {
         return productRepository.findAll();
     }

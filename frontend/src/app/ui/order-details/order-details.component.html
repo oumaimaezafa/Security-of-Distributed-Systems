@@ -1,0 +1,57 @@
+<div class="container py-4">
+  <!-- Card Header with Order ID -->
+  <div class="card shadow-sm">
+    <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center">
+      <h5 class="mb-0">Order Details: {{ orderId }}</h5>
+      <!-- Back button with Feather Icons -->
+      <button class="btn btn-light btn-sm d-flex align-items-center" (click)="onBack()">
+        <i data-feather="arrow-left" class="me-2"></i> Back
+      </button>
+    </div>
+
+    <!-- Order Summary -->
+    <div class="card-body">
+      <h6 class="text-secondary">Order Summary</h6>
+      <ul class="list-group list-group-flush mb-3">
+        <li class="list-group-item">
+          <strong>State:</strong> {{ orderDetails.state }}
+        </li>
+        <li class="list-group-item">
+          <strong>Date:</strong> {{ orderDetails.date | date: 'medium' }}
+        </li>
+      </ul>
+
+      <!-- Product Items Table -->
+      <h6 class="text-secondary">Product Items</h6>
+      <div class="table-responsive">
+        <table class="table table-hover table-bordered">
+          <thead class="table-info text-center">
+          <tr>
+            <th>ID</th>
+            <th>Product Name</th>
+            <th>Price</th>
+            <th>Quantity</th>
+            <th>Amount</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let pi of orderDetails.productItems" class="text-center">
+            <td>{{ pi.id }}</td>
+            <td>{{ pi.product.name }}</td>
+            <td>{{ pi.prix | currency: 'USD':'symbol':'1.2-2' }}</td>
+            <td>{{ pi.quantity }}</td>
+            <td>{{ pi.quantity * pi.prix | currency: 'USD':'symbol':'1.2-2' }}</td>
+          </tr>
+          <tr class="fw-bold text-center bg-light">
+            <td colspan="4">Total</td>
+            <td>{{ getTotal(orderDetails) | currency: 'USD':'symbol':'1.2-2' }}</td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Footer with Actions -->
+
+  </div>
+</div>

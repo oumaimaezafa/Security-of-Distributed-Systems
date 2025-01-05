@@ -20,9 +20,9 @@ public class EComAppApplication {
 	@Bean
 	CommandLineRunner commandLineRunner(ProductRepository productRepository){
 		return args->{
-           productRepository.save(Product.builder().id(UUID.randomUUID().toString()).name("Computer").price(23000.0).quantity(12).build());
-		   productRepository.save(Product.builder().id(UUID.randomUUID().toString()).name("Printer").price(1200.0).quantity(7).build());
-		   productRepository.save(Product.builder().id(UUID.randomUUID().toString()).name("Smart Phone").price(4300.0).quantity(5).build());
+           productRepository.save(Product.builder().id("P01").name("Computer").price(23000.0).quantity(12).build());
+		   productRepository.save(Product.builder().id("P02").name("Printer").price(1200.0).quantity(7).build());
+		   productRepository.save(Product.builder().id("P03").name("Smart Phone").price(4300.0).quantity(5).build());
 		};
 	}
 }

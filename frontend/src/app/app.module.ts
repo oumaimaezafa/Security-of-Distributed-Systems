@@ -8,6 +8,8 @@ import { ProductsComponent } from './ui/products/products.component';
 import { NgForOf } from "@angular/common";
 import { HttpClientModule } from "@angular/common/http";
 import { KeycloakAngularModule, KeycloakService } from "keycloak-angular";
+import { OrdersComponent } from './ui/orders/orders.component';
+import { OrderDetailsComponent } from './ui/order-details/order-details.component';
 
 export function initializeKeycloak(keycloak: KeycloakService, platformId: Object) {
   return () => {
@@ -34,7 +36,9 @@ export function initializeKeycloak(keycloak: KeycloakService, platformId: Object
   declarations: [
     AppComponent,
     CustomersComponent,
-    ProductsComponent
+    ProductsComponent,
+    OrdersComponent,
+    OrderDetailsComponent
   ],
   imports: [
     BrowserModule,
