@@ -4,6 +4,8 @@ package ma.oumaimaezafa.E_com_App.web;
 import ma.oumaimaezafa.E_com_App.entities.Product;
 import ma.oumaimaezafa.E_com_App.repositoriy.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -17,7 +19,8 @@ public class ProductRestController {
 
 
     @GetMapping("/products")
-    public List<Product> productList(){
+    @PreAuthorize("hasAuthority('ADMIN')")
+    public List<Product> productList()  {
         return productRepository.findAll();
     }
 
@@ -27,4 +30,9 @@ public class ProductRestController {
     }
 
 
+    //contexte de securite
+    @GetMapping("/auth")
+    public Authentication authentication(Authentication authentication){
+        return authentication;
+    }
 }
